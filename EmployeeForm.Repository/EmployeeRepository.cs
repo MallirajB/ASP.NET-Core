@@ -104,11 +104,8 @@ namespace EmployeeForm.Repository
                 employeeDetails.CreatePassword = item.Create_Password;
                 employeeDetails.ConfirmPassword = item.Confirm_Password;
                 model.Add(employeeDetails);
-
             }
-
             return model;
-
         }
         #endregion
 
