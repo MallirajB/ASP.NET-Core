@@ -13,5 +13,8 @@ namespace EmployeeForm.Core.IService
         EmployeeDetails EditMethod(int employeeId);
         List<EmployeeDetails> ListMethod();
         void DeleteMethod(int employeeId);
+        List<EmployeeDetails> SearchMethod(string name);
+        List<Location> GetDropdown();
+
     }
 }

@@ -1,0 +1,32 @@
+﻿@model EmployeeForm.Core.Model.EmployeeDetails
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+@Html.DisplayName("First Name:")
+@Html.DisplayFor(model=> model.FirstName)
+<br />
+@Html.DisplayName("Last Name:")
+@Html.DisplayFor(model => model.LastName)
+<br />
+@Html.DisplayName("Date of Joining:")
+@Html.DisplayFor(model => model.DateStr)
+<br />
+@Html.DisplayName("Age:")
+@Html.DisplayFor(model => model.EmployeeAge)
+<br />
+@Html.DisplayName("Work Location:")
+@Html.DisplayFor(model => model.WorkLocation)
+<br />
+@Html.DisplayName("Employe Address:")
+@Html.DisplayFor(model=> model.EmployeeAddress)
+<br />
+@Html.DisplayName("Employee Experience:")
+@Html.DisplayFor(model =>model.EmployeeExperience)
+<br />
+@Html.DisplayName("Contact Number:")
+@Html.DisplayFor(model =>model.ContactNumber)
+<br />
+@Html.DisplayName("Password:")
+@Html.DisplayFor(model => model.CreatePassword)

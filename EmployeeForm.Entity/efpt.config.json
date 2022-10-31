@@ -17,6 +17,10 @@
       {
          "Name": "[dbo].[EmployeeInfo]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EmployeeLocation]",
+         "ObjectType": 0
       }
    ],
    "UiHint": "(localdb)\\MSSqlLocalDb.EmployeeDetails",

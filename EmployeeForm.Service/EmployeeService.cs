@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace EmployeeForm.Service
 {
-   public class EmployeeService: IEmployeeService
+    public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository entry;
 
@@ -36,7 +37,6 @@ namespace EmployeeForm.Service
         #endregion
 
         #region Edit
-
         public EmployeeDetails EditMethod(int employeeId)
         {
             return entry.EditMethod(employeeId);
@@ -47,6 +47,17 @@ namespace EmployeeForm.Service
         public void DeleteMethod(int employeeId)
         {
             entry.DeleteMethod(employeeId);
+        }
+        #endregion
+
+        #region MyRegion
+        public List<EmployeeDetails> SearchMethod(string name)
+        {
+            return entry.SearchMethod(name);
+        }
+        public List<Location> GetDropdown()
+        {
+            return entry.GetDropdown();
         }
         #endregion
     }

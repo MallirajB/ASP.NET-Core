@@ -21,17 +21,17 @@
     label {
         color: white;
     }
-
-   option {
+    option {
         background-color: #215888;
         color: white;
     }
-    
+    span {
+        color: #ffc224e0;
+    }
     .error {
-        color: white;
+        color: #ffc224cf;
         padding-bottom: 10px;
     }
-    
 </style>
 
 @using (Html.BeginForm("CreateForm", "Employee", FormMethod.Post, new { @id = "signupform", autocomplete = "off" }))
@@ -42,85 +42,79 @@
             @Html.HiddenFor(p=>p.EmployeeId)
             <label class="form-label">First Name<span>*</span></label>
             <div id="errors">
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><i class=" far fa-user"></i></div>
-                @Html.TextBoxFor(p => p.FirstName,  new {@class="form-control form-control-md",@id="firstname" ,placeholder = "First Name"})
-            </div>
+                <div class="form-group d-flex align-items-center">
+                    <div class="icon"><i class=" far fa-user"></i></div>
+                    @Html.TextBoxFor(p => p.FirstName,  new {@class="form-control form-control-md",@id="firstname" ,placeholder = "First Name"})
+                </div>
             </div>
             <div id="errors">
                 <label class="form-label">Last Name<span>*</span></label>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><i class=" far fa-user"></i></div>
-                @Html.TextBoxFor(p => p.LastName,  new {@class="form-control form-control-md",@id="lastname" ,placeholder = "Last Name"})
-            </div>
+                <div class="form-group d-flex align-items-center">
+                    <div class="icon"><i class=" far fa-user"></i></div>
+                    @Html.TextBoxFor(p => p.LastName,  new {@class="form-control form-control-md",@id="lastname" ,placeholder = "Last Name"})
+                </div>
             </div>
             <div id="errors">
                 <label class="form-label">Date of Joining<span>*</span></label>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><i class="fa fa-calendar"></i></div>
-                @Html.TextBoxFor(p => p.DateStr,  new { @class="form-control form-control-md",placeholder = "yyyy-mm-dd" ,id="datepicker"})
-            </div>
+                <div class="form-group d-flex align-items-center">
+                    <div class="icon"><i class="fa fa-calendar"></i></div>
+                    @Html.TextBoxFor(p => p.DateStr,  new { @class="form-control form-control-md",placeholder = "yyyy-mm-dd" ,id="datepicker"})
+                </div>
             </div>
             <div id="errors">
                 <label class="form-label">Age<span>*</span></label>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><i class="fa-solid fa-cake-candles"></i></div>
-                @Html.TextBoxFor(m => m.EmployeeAge,new{  @class="form-control form-control-md",placeholder = "Age"})
-            </div>
+                <div class="form-group d-flex align-items-center">
+                    <div class="icon"><i class="fa-solid fa-cake-candles"></i></div>
+                    @Html.TextBoxFor(m => m.EmployeeAge,new{  @class="form-control form-control-md",placeholder = "Age"})
+                </div>
             </div>
             <div id="errors">
                 <label class="form-label">Experience<span>*</span></label>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><i class="fa fa-graduation-cap"></i></div>
-                @Html.TextBoxFor(m => m.EmployeeExperience,new{  @class="form-control form-control-md",placeholder = "Experience"})
+                <div class="form-group d-flex align-items-center">
+                    <div class="icon"><i class="fa fa-graduation-cap"></i></div>
+                    @Html.TextBoxFor(m => m.EmployeeExperience,new{  @class="form-control form-control-md",placeholder = "Experience"})
+                </div>
             </div>
-            </div>
-            <div id ="errors">
+            <div id="errors">
                 <label class="form-label">Contact Number<span>*</span></label>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><i class="fas fa-phone"></i></div>
-                @Html.TextBoxFor(m => m.ContactNumber,new{ maxlength = "10",@class="form-control form-control-md",placeholder = "PhoneNumber"})
+                <div class="form-group d-flex align-items-center">
+                    <div class="icon"><i class="fas fa-phone"></i></div>
+                    @Html.TextBoxFor(m => m.ContactNumber,new{ maxlength = "10",@class="form-control form-control-md",placeholder = "PhoneNumber"})
 
-            </div>
+                </div>
             </div>
             <div id="errors">
                 <label class="form-label">Address<span>*</span></label>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                @Html.TextBoxFor(m => m.EmployeeAddress,new{  @class="form-control form-control-md",placeholder = "Address"})
-            </div>
+                <div class="form-group d-flex align-items-center">
+                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                    @Html.TextBoxFor(m => m.EmployeeAddress,new{  @class="form-control form-control-md",placeholder = "Address"})
+                </div>
             </div>
             <div id="errors">
                 <label class="form-label">Work Location<span>*</span></label>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                @Html.DropDownListFor(m => m.EmployeeWorkLocation,new List<SelectListItem>
-            {
-            new SelectListItem{ Text="Bangalore"},
-            new SelectListItem{ Text="Chennai"},
-            new SelectListItem{ Text="Coimbatore"},
-            new SelectListItem{ Text="Erode"},
-            },"select work location",new {@class="form-control input-height-sm"})
-            </div>
+                <div class="form-group d-flex align-items-center">
+                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                    @Html.DropDownListFor(m=>m.LocationId, new SelectList(ViewBag.Location, "LocationId", "WorkLocation"), "Select Location", new { @class = "form-control", @id = "Locationid" })
+                </div>
             </div>
             <div id="errors">
-            <label class="form-label">Password<span>*</span></label>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><i class="fas fa-key"></i></div>
-                @Html.PasswordFor(m => m.CreatePassword,new{@class=" form-control form-control-md" ,id="password",placeholder = "password"})
-                <div class="icon btn"><span class="fas fa-eye-slash" onclick="myFunction()"></span></div>
+                <label class="form-label">Password<span>*</span></label>
+                <div class="form-group d-flex align-items-center">
+                    <div class="icon"><i class="fas fa-key"></i></div>
+                    @Html.PasswordFor(m => m.CreatePassword,new{@class=" form-control form-control-md" ,id="password",placeholder = "password"})
+                    <div class="icon btn"><i class="fas fa-eye-slash" id="showpassword" onclick="myFunction()"></i></div>
+                </div>
             </div>
-            </div>
-            <div id ="errors">
+            <div id="errors">
                 <label class="form-label">Confirm Password<span>*</span></label>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><i class="fas fa-key"></i></div>
-                @Html.PasswordFor(m => m.ConfirmPassword,new{@class=" form-control input-height-sm " ,id="confirm",placeholder = "Confirm password"})
-                <div class="icon btn"><span class="fas fa-eye-slash" onclick="myFunction1()"></span></div>
-            </div>
+                <div class="form-group d-flex align-items-center">
+                    <div class="icon"><i class="fas fa-key"></i></div>
+                    @Html.PasswordFor(m => m.ConfirmPassword,new{@class=" form-control input-height-sm " ,id="confirm",placeholder = "Confirm password"})
+                    <div class="icon btn"><i class="fas fa-eye-slash" id="showpasswords" onclick="myFunction1()"></i></div>
+                </div>
             </div>
             <div>
-            <button class="btn btn-primary mb-3">Save</button>
+                <button class="btn btn-primary mb-3">Save</button>
             </div>
         </form>
     </div>
@@ -157,7 +151,7 @@
                     minlength: 5,
                     equalTo: "#password" //for checking both passwords are same or not
                 },
-                EmployeeWorkLocation:
+                LocationId:
                 {
                     required: true,
                 },
@@ -219,8 +213,8 @@
             },
             errorPlacement: function (error, element) {
 
-                if (element.is(":text") || element.is(":password") || element.is("#EmployeeWorkLocation")) {
-                    error.insertAfter(element.parents('#errors'));  
+                if (element.is(":text") || element.is(":password") || element.is("#Locationid")) {
+                    error.insertAfter(element.parents('#errors'));
                 }
                 else { // This is the default behavior
                     error.insertAfter(element);
@@ -232,19 +226,26 @@
         });
     });
     function myFunction() {
-        var x = document.getElementById("password");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
+        var password = document.getElementById('password');
+        var passshow = document.getElementById('showpassword');
+        if (password.type == 'password') {
+            password.type = 'text';
+            passshow.className = 'fa fa-eye';
+        }
+        else {
+            password.type = 'password';
+            passshow.className = 'fa fa-eye-slash';
         }
     }
     function myFunction1() {
-        var x = document.getElementById("confirm");
-        if (x.type === "password") {
-            x.type = "text";
+        var password = document.getElementById("confirm");
+        var passshow = document.getElementById('showpasswords');
+        if (password.type === "password") {
+            password.type = "text";
+            passshow.className = 'fa fa-eye';
         } else {
-            x.type = "password";
+            password.type = "password";
+            passshow.className = 'fa fa-eye-slash';
         }
     }
 </script>

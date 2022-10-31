@@ -19,12 +19,12 @@ namespace EmployeeForm.Entity
         }
 
         public virtual DbSet<EmployeeInfo> EmployeeInfo { get; set; }
+        public virtual DbSet<EmployeeLocation> EmployeeLocation { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSqlLocalDb;Initial Catalog=EmployeeDetails;Integrated Security=True");
             }
         }
@@ -33,7 +33,8 @@ namespace EmployeeForm.Entity
         {
             modelBuilder.Entity<EmployeeInfo>(entity =>
             {
-                entity.HasKey(e => e.Employee_Id);
+                entity.HasKey(e => e.Employee_ID)
+                    .HasName("PK_EmployeeInfo_1");
 
                 entity.Property(e => e.Confirm_Password)
                     .HasMaxLength(10)
@@ -55,10 +56,6 @@ namespace EmployeeForm.Entity
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Employee_work_Location)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.First_Name)
                     .HasMaxLength(30)
                     .IsUnicode(false);
@@ -68,6 +65,31 @@ namespace EmployeeForm.Entity
                     .IsUnicode(false);
 
                 entity.Property(e => e.Updated_Time_Stamp)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Location)
+                    .WithMany(p => p.EmployeeInfo)
+                    .HasForeignKey(d => d.LocationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EmployeeInfo_EmployeeLocation1");
+            });
+
+            modelBuilder.Entity<EmployeeLocation>(entity =>
+            {
+                entity.HasKey(e => e.LocationId)
+                    .HasName("PK_EmployeeLocation_1");
+
+                entity.Property(e => e.Created_Time_stamp)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Employee_Work_Location)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Updated_Time_stamp)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
             });

@@ -15,6 +15,12 @@ namespace EmployeeFormAPI.Controllers
             this._EmployeeServices = _EmployeeServices;
         }
         #region Create
+        [HttpGet]
+        public IActionResult GetDetail()
+        {
+           var data= _EmployeeServices.GetDropdown();
+            return Ok(data);
+        }
         [HttpPost]
         public IActionResult CreateForm(EmployeeDetails registration)
         {
@@ -37,7 +43,7 @@ namespace EmployeeFormAPI.Controllers
         public IActionResult EditForm(int employeeId)
         {
            var value= _EmployeeServices.EditMethod(employeeId);
-            return Ok(value) ;
+             return Ok(value) ;
         }
         #endregion
 
@@ -47,6 +53,15 @@ namespace EmployeeFormAPI.Controllers
         {
             _EmployeeServices.DeleteMethod(employeeId);
             return Ok();
+        }
+        #endregion
+
+        #region Assign
+        [HttpGet]
+        public IActionResult SearchForm(string name)
+        {
+            var data=_EmployeeServices.SearchMethod(name);
+            return Ok(data);
         }
         #endregion
     }
