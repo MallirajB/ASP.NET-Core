@@ -124,7 +124,6 @@ namespace EmployeeForm.Repository
         #region SearchMethod
         public List<EmployeeDetails> SearchMethod(string name)
         {
-
             List<EmployeeDetails> model = new List<EmployeeDetails>();
             var data = entity.EmployeeInfo.Where(x => x.First_Name.Contains(name) && x.Is_Deleted == false).ToList();
             if (name != null)
@@ -136,6 +135,9 @@ namespace EmployeeForm.Repository
                     employeeDetails.FirstName = item.First_Name;
                     employeeDetails.LastName = item.Last_Name;
                     employeeDetails.EmployeeAge = item.Employee_Age;
+                    var value = item.LocationId;
+                    var section = entity.EmployeeLocation.Where(x => x.LocationId == value).SingleOrDefault();
+                    employeeDetails.WorkLocation = section.Employee_Work_Location;
                     employeeDetails.LocationId = item.LocationId;
                     employeeDetails.EmployeeAddress = item.Employee_Address;
                     employeeDetails.ContactNumber = item.Contact_Number;
@@ -144,7 +146,6 @@ namespace EmployeeForm.Repository
                     employeeDetails.CreatePassword = item.Create_Password;
                     employeeDetails.ConfirmPassword = item.Confirm_Password;
                     model.Add(employeeDetails);
-
                 }
             }
             return model;
